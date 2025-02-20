@@ -1,0 +1,334 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Mono", monospace;
+  }
+  
+  body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background-color 0.3s;
+    flex-direction: column;
+  }
+  
+  .calculator {
+    background-color: #ffffff;
+    width: 450px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 20px; 
+  }
+  
+  .display {
+    position: relative; 
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    display: block;
+    width: 100%; 
+    padding: 20px 20px 20px 40px; 
+    text-align: right;
+    font-size: 30px;
+    border: none;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .history-toggle {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  .history-toggle:hover {
+    color: #000;
+  }
+  
+  body.dark-mode .history-toggle {
+    color: #fff; 
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  
+  input[type="button"] {
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Number buttons */
+  input[class="input-button"] {
+    background-color: #e0e0e0;
+  }
+  
+  input[class="input-button"]:hover {
+    background-color: #d0d0d0;
+  }
+  
+  /* Clear and erase buttons */
+  input[value="AC"] {
+    background-color: #ff4d4d;
+    color: #ffffff;
+  }
+  
+  input[value="⌫"] {
+    background-color: #ff9800;
+    color: #ffffff;
+  }
+  
+  input[value="AC"]:hover {
+    background-color: #e60000;
+  }
+  
+  input[value="⌫"]:hover {
+    background-color: #e68900;
+  }
+  
+  /* Equal button */
+  input[value="="] {
+    background-color: #4caf50;
+    color: #ffffff;
+  }
+  
+  input[value="="]:hover {
+    background-color: #388e3c;
+  }
+  
+  button#erase {
+    background-color: #ff9800;
+    color: #ffffff;
+    font-size: 15px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  button#erase:hover {
+    background-color: #e68900;
+  }
+  
+  /* Dark Mode Styles */
+  body.dark-mode {
+    background-color: #121212;
+    color: white;
+  }
+  
+  .calculator.dark-mode {
+    background-color: #333;
+    color: white;
+  }
+  
+  input[type="text"].dark-mode {
+    background-color: #444;
+    color: white;
+  }
+  
+  input[type="button"].dark-mode {
+    background-color: #555;
+    color: white;
+  }
+  
+  button#erase.dark-mode {
+    background-color: #ff9800; 
+    color: #ffffff;
+  }
+  
+  /* Retain button colors in dark mode */
+  input[value="AC"].dark-mode {
+    background-color: #ff4d4d;
+    color: #ffffff;
+  }
+  
+  input[value="="].dark-mode {
+    background-color: #4caf50;
+    color: #ffffff;
+  }
+  
+  /* Theme Toggle Styles */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  #theme-toggle-checkbox {
+    display: none; 
+  }
+  
+  .theme-toggle-label {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .theme-toggle-label i {
+    font-size: 16px;
+    color: #333333; 
+    transition: opacity 0.3s;
+  }
+  
+  .theme-toggle-label i.fa-moon {
+    opacity: 0;
+  }
+  
+  .theme-toggle-label i.fa-sun {
+    opacity: 1;
+    color: #f5da11;
+  }
+  
+  .theme-toggle-label .ball {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+  
+  #theme-toggle-checkbox:checked + .theme-toggle-label .ball {
+    transform: translateX(30px);
+  }
+  
+  #theme-toggle-checkbox:checked + .theme-toggle-label i.fa-moon {
+    opacity: 1;
+  }
+  
+  #theme-toggle-checkbox:checked + .theme-toggle-label i.fa-sun {
+    opacity: 0;
+  }
+  
+  /* History Section */
+  .history {
+    display: none; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .history-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 80%; 
+    max-width: 600px; 
+    max-height: 50%;
+    overflow-y: auto; 
+    position: relative;
+  }
+  
+  .history.show {
+    display: flex; 
+  }
+  
+  .history h2 {
+    margin-bottom: 10px;
+  }
+  
+  .history ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .history li {
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .history li:last-child {
+    border-bottom: none;
+  }
+  
+  .history button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff4d4d;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .history button:hover {
+    background-color: #e60000;
+  }
+  
+  .close-history {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333; 
+  }
+  
+  .close-history:hover {
+    color: white; 
+  }
+  
+  /* Dark Mode Styles for History */
+  body.dark-mode .history-content {
+    background-color: #333;
+    color: white;
+  }
+  
+  body.dark-mode .history li {
+    border-bottom: 1px solid #555;
+  }
+  
+  body.dark-mode .history button {
+    background-color: #ff4d4d;
+    color: #ffffff;
+  }
+  
+  body.dark-mode .history button:hover {
+    background-color: #e60000;
+  }
+  
+  body.dark-mode .close-history {
+    color: white;
+  }
