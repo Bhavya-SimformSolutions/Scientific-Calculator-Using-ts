@@ -25,7 +25,7 @@ class Calculator {
     }
 
     handleInputButtonClick(value: string): void {
-        const operators = ['+', '-', '*', '/', '%'];
+        const operators: string[] = ['+', '-', '*', '/', '%'];
 
         if (this.equal_pressed === 1) {
             this.equal_pressed = 0;
@@ -86,7 +86,7 @@ class Calculator {
     }
 
     handleDegButtonClick(): void {
-        const deg = document.querySelector<HTMLInputElement>('input[value="deg"], input[value="rad"]');
+        const deg: HTMLInputElement | null = document.querySelector<HTMLInputElement>('input[value="deg"], input[value="rad"]');
         if (!deg) return;
 
         if (deg.value === "deg") {
@@ -100,7 +100,7 @@ class Calculator {
 
     handleSecondButtonClick(): void {
         this.isSecondMode = !this.isSecondMode;
-        const second = document.getElementById("2nd") as HTMLElement;
+        const second : HTMLElement = document.getElementById("2nd") as HTMLElement;
         if (this.isSecondMode) {
             second.style.backgroundColor = "#0083e9";
             this.updateButtonValues("second");
@@ -213,8 +213,8 @@ class Calculator {
     }
 
     handleKeyboardInput(event: KeyboardEvent): void {
-        const key = event.key;
-        const validKeys = "0123456789+-*/%^().";
+        const key: string = event.key;
+        const validKeys: string = "0123456789+-*/%^().";
         const specialKeys: { [key: string]: string } = {
             "Enter": "=",
             "Backspace": "erase",
@@ -236,7 +236,7 @@ class Calculator {
     }
 
     handleThemeToggle(): void {
-        const isChecked = (document.getElementById('theme-toggle-checkbox') as HTMLInputElement).checked;
+        const isChecked: boolean = (document.getElementById('theme-toggle-checkbox') as HTMLInputElement).checked;
         document.body.classList.toggle('dark-mode', isChecked);
         document.querySelector('.calculator')?.classList.toggle('dark-mode', isChecked);
         document.querySelectorAll('input[type="text"]').forEach(input => {
@@ -257,7 +257,7 @@ class Calculator {
     }
 
     addToHistory(expression: string, result: number | string): void {
-        const historyItem = document.createElement("li");
+        const historyItem: HTMLLIElement = document.createElement("li");
         historyItem.textContent = `${expression} = ${result}`;
         this.historyList.appendChild(historyItem);
         this.saveHistory();

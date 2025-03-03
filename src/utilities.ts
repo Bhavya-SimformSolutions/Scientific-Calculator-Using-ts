@@ -35,7 +35,7 @@ export function calculateBasicOperations(expression: string, isDegreeMode: boole
             }
         }
 
-        let openParentheses = 0;
+        let openParentheses:number = 0;
         for (const token of fixedTokens) {
             if (token === '(') openParentheses++;
             if (token === ')') openParentheses--;
@@ -176,7 +176,7 @@ export function calculateBasicOperations(expression: string, isDegreeMode: boole
 export function factorialFunction(n: number): number {
     if (n < 0) return NaN;
     if (n === 0 || n === 1) return 1;
-    let result = 1;
+    let result: number = 1;
     for (let i = 2; i <= n; i++) {
         result *= i;
     }
