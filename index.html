@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scientific Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  </head>
+  <body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle">
+      <input type="checkbox" id="theme-toggle-checkbox" />
+      <label for="theme-toggle-checkbox" class="theme-toggle-label">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+        <div class="ball"></div>
+      </label>
+    </div>
+    <!---------->
+
+    <!-- Calculator Section -->
+    <div class="calculator">
+      <div class="display">
+        <button id="history-toggle" class="history-toggle"><i class="fas fa-history"></i></button>
+        <input type="text" placeholder="0" id="input" disabled />
+      </div>
+      <div class="buttons">
+        <input type="button" value="deg" />
+        <input type="button" value="π" id="pi" />
+        <input type="button" value="e" id="e" />
+        <input type="button" value="AC" id="clear" />
+        <button id="erase"><i class="fas fa-backspace fa-lg"></i></button>
+
+        <input type="button" value="2nd" id="2nd" />
+        <input type="button" value="sin" id="sin" />
+        <input type="button" value="cos" id="cos" />
+        <input type="button" value="tan" id="tan" />
+        <input type="button" value="|x|" id="abs" />
+
+        <input type="button" value="xʸ" id="pow" />
+        <input type="button" value="√" id="sqrt" />
+        <input type="button" value="log" id="log" />
+        <input type="button" value="ln" id="ln" />
+        <input type="button" value="%" class="input-button" id="percent" />
+
+        <input type="button" value="x!" id="factorial" />
+        <input type="button" value="7" class="input-button" />
+        <input type="button" value="8" class="input-button" />
+        <input type="button" value="9" class="input-button" />
+        <input type="button" value="*" class="input-button" />
+        
+        <input type="button" value="1/x" id="reciprocal" />
+        <input type="button" value="4" class="input-button" />
+        <input type="button" value="5" class="input-button" />
+        <input type="button" value="6" class="input-button" />
+        <input type="button" value="-" class="input-button" />
+
+        <input type="button" value="(" class="input-button" />
+        <input type="button" value="1" class="input-button" />
+        <input type="button" value="2" class="input-button" />
+        <input type="button" value="3" class="input-button" />
+        <input type="button" value="+" class="input-button" />
+        
+        <input type="button" value=")" class="input-button" />
+        <input type="button" value="0" class="input-button" />
+        <input type="button" value="." class="input-button" />
+        <input type="button" value="/" class="input-button" />
+        <input type="button" value="=" id="equal" />
+      </div>
+    </div>
+    <!---------->
+
+    <!-- History Section -->
+    <div class="history" id="history-section">
+      <div class="history-content">
+        <button class="close-history" id="close-history">&times;</button>
+        <h2>History</h2>
+        <ul id="history-list"></ul>
+        <button id="clear-history">Clear History</button>
+      </div>
+    </div>
+    <!---------->
+
+    <script type="module" src="dist/main.js"></script>
+  </body>
+</html>
