@@ -172,6 +172,7 @@ export function calculateBasicOperations(expression: string, isDegreeMode: boole
         return (error as Error).message;
     }
 }
+
 export function factorialFunction(n: number): number {
     if (n < 0) return NaN;
     if (n === 0 || n === 1) return 1;

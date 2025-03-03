@@ -21,7 +21,7 @@ interface Calculator {
     toggleHistory(): void;
 }
 
-export function setupEventHandlers(calculator: Calculator) {
+export function setupEventHandlers(calculator: Calculator): void {
     document.querySelectorAll(".input-button").forEach(button => {
         button.addEventListener("click", () => calculator.handleInputButtonClick((button as HTMLInputElement).value));
     });

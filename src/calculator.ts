@@ -24,7 +24,7 @@ class Calculator {
         setupEventHandlers(this);
     }
 
-    handleInputButtonClick(value: string) {
+    handleInputButtonClick(value: string): void {
         const operators = ['+', '-', '*', '/', '%'];
 
         if (this.equal_pressed === 1) {
@@ -39,7 +39,7 @@ class Calculator {
         }
     }
 
-    handleEqualButtonClick() {
+    handleEqualButtonClick(): void {
         let inp_val = this.input.value;
         if (this.equal_pressed === 1 && this.lastExpression) {
             inp_val = this.lastExpression;
@@ -74,18 +74,18 @@ class Calculator {
         this.equal_pressed = 1;
     }
 
-    handleClearButtonClick() {
+    handleClearButtonClick(): void {
         this.input.value = "";
         this.lastResult = null;
         this.lastExpression = null;
         this.equal_pressed = 0;
     }
 
-    handleEraseButtonClick() {
+    handleEraseButtonClick(): void {
         this.input.value = this.input.value.substr(0, this.input.value.length - 1);
     }
 
-    handleDegButtonClick() {
+    handleDegButtonClick(): void {
         const deg = document.querySelector<HTMLInputElement>('input[value="deg"], input[value="rad"]');
         if (!deg) return;
 
@@ -97,7 +97,8 @@ class Calculator {
             this.isDegreeMode = true;
         }
     }
-    handleSecondButtonClick() {
+
+    handleSecondButtonClick(): void {
         this.isSecondMode = !this.isSecondMode;
         const second = document.getElementById("2nd") as HTMLElement;
         if (this.isSecondMode) {
@@ -108,7 +109,8 @@ class Calculator {
             this.updateButtonValues("primary");
         }
     }
-    updateButtonValues(mode: "primary" | "second") {
+
+    updateButtonValues(mode: "primary" | "second"): void {
         const buttonValues = {
             primary: {
                 sin: "sin",
@@ -134,26 +136,28 @@ class Calculator {
             button.value = value;
         }
     }
-    handleTrigButtonClick(func: string) {
+
+    handleTrigButtonClick(func: string): void {
         this.input.value += this.isSecondMode ? `${func}⁻¹(` : `${func}(`;
     }
-    
-    handleLogButtonClick() {
+
+    handleLogButtonClick(): void {
         if (this.isSecondMode) {
             this.input.value += this.input.value === "" ? "10^" : "10^";
         } else {
             this.input.value += "log(";
         }
     }
-    handlePiButtonClick() {
+
+    handlePiButtonClick(): void {
         this.input.value += "π";
     }
-    
-    handleEButtonClick() {
+
+    handleEButtonClick(): void {
         this.input.value += "e";
     }
-    
-    handleSqrtButtonClick() {
+
+    handleSqrtButtonClick(): void {
         if (this.isSecondMode) {
             let value = this.input.value || "0";
             this.input.value = Math.pow(parseFloat(value), 2).toString();
@@ -166,30 +170,32 @@ class Calculator {
             }
         }
     }
-    handleLnButtonClick() {
+
+    handleLnButtonClick(): void {
         if (this.isSecondMode) {
             this.input.value += this.input.value === "" ? "e^" : "e^";
         } else {
             this.input.value += "ln(";
         }
     }
-    
-    handlePowButtonClick() {
+
+    handlePowButtonClick(): void {
         if (this.input.value === "") {
             this.input.value = "0^";
         } else {
             this.input.value += "^";
         }
     }
-    handleFactorialButtonClick() {
+
+    handleFactorialButtonClick(): void {
         if (this.input.value === "") {
             this.input.value += "0!";
         } else {
             this.input.value += "!";
         }
     }
-    
-    handleReciprocalButtonClick() {
+
+    handleReciprocalButtonClick(): void {
         if (this.input.value === "") {
             this.input.value += "1/(";
         } else {
@@ -197,15 +203,16 @@ class Calculator {
             this.input.value = (1 / value).toString();
         }
     }
-    handleAbsButtonClick() {
+
+    handleAbsButtonClick(): void {
         if (this.input.value === "") {
             this.input.value += "abs(";
         } else {
             this.input.value = `abs(${this.input.value})`;
         }
     }
-    
-    handleKeyboardInput(event: KeyboardEvent) {
+
+    handleKeyboardInput(event: KeyboardEvent): void {
         const key = event.key;
         const validKeys = "0123456789+-*/%^().";
         const specialKeys: { [key: string]: string } = {
@@ -227,7 +234,8 @@ class Calculator {
             }
         }
     }
-    handleThemeToggle() {
+
+    handleThemeToggle(): void {
         const isChecked = (document.getElementById('theme-toggle-checkbox') as HTMLInputElement).checked;
         document.body.classList.toggle('dark-mode', isChecked);
         document.querySelector('.calculator')?.classList.toggle('dark-mode', isChecked);
@@ -247,22 +255,23 @@ class Calculator {
             button.classList.toggle('dark-mode', isChecked);
         });
     }
-    addToHistory(expression: string, result: number | string) {
+
+    addToHistory(expression: string, result: number | string): void {
         const historyItem = document.createElement("li");
         historyItem.textContent = `${expression} = ${result}`;
         this.historyList.appendChild(historyItem);
         this.saveHistory();
     }
-    
-    saveHistory() {
+
+    saveHistory(): void {
         const historyItems: string[] = [];
         this.historyList.querySelectorAll("li").forEach(item => {
             historyItems.push(item.textContent || '');
         });
         localStorage.setItem("calculatorHistory", JSON.stringify(historyItems));
     }
-    
-    loadHistory() {
+
+    loadHistory(): void {
         const historyItems: string[] = JSON.parse(localStorage.getItem("calculatorHistory") || "[]");
         historyItems.forEach(item => {
             const historyItem = document.createElement("li");
@@ -270,12 +279,13 @@ class Calculator {
             this.historyList.appendChild(historyItem);
         });
     }
-    clearHistory() {
+
+    clearHistory(): void {
         this.historyList.innerHTML = "";
         localStorage.removeItem("calculatorHistory");
     }
-    
-    toggleHistory() {
+
+    toggleHistory(): void {
         this.historySection.classList.toggle("show");
     }
 }
